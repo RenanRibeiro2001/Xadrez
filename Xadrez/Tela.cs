@@ -1,10 +1,48 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using tabuleiro;
+using xadrez;
 
 namespace Xadrez
 {
     internal class Tela
     {
+        //imprime a partida
+        public static void imprimirPartida(PartidaDeXadrez partida)
+        {
+            imprimirTabuleiro(partida.tab);
+            Console.WriteLine();
+            imprimirPecasCapturadas(partida);
+            Console.WriteLine();
+            Console.WriteLine("Turno: " + partida.turno);
+            Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+        }
+
+        //imprime as pecas capturadas
+        public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
+            Console.WriteLine("pecas capturadas: ");
+            Console.Write("Brancas: ");
+            imprimirConjunto(partida.pecasCapturadas(Cor.Branca));
+            Console.WriteLine();
+            Console.Write("Pretas: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            imprimirConjunto(partida.pecasCapturadas(Cor.Preta));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+        }
+
+        //imprime as o conjunto das pecas capturadas
+        public static void imprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("[");
+            foreach(Peca x in conjunto)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
+
         //imprime o tabuleiro no console
         public static void imprimirTabuleiro(Tabuleiro tab)
         {
@@ -55,6 +93,7 @@ namespace Xadrez
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadrez(coluna, linha);
         }
+
         //imprime a peca diferenciando a cor
         public static void imprimirPeca(Peca peca)
         {
