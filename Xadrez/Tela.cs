@@ -20,7 +20,7 @@ namespace Xadrez
             Console.WriteLine("  a b c d e f g h");
         }
 
-        //imprime o tabuleiro no console
+        //imprime o tabuleiro no console com as movimentacoes possiveis da peca
         public static void imprimirTabuleiro(Tabuleiro tab, bool[,] posicoesPossiveis)
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
