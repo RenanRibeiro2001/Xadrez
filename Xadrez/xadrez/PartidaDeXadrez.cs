@@ -29,6 +29,7 @@ namespace xadrez
             colocarPecas();
         }
 
+        //executa o movimento da peca
         public Peca executaMovimento(Posicao origem, Posicao destino)
         {
             Peca p = tab.retirarPeca(origem);
@@ -82,6 +83,7 @@ namespace xadrez
             return pecaCapturada;
         }
 
+        //desfaz o movimento da peca
         public void desfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
         {
             Peca p = tab.retirarPeca(destino);
@@ -134,6 +136,8 @@ namespace xadrez
 
         }
 
+
+        //faz a jogada acontecer
         public void realizaJogada(Posicao origem, Posicao destino)
         {
             Peca pecaCapturada = executaMovimento(origem, destino);
@@ -190,6 +194,7 @@ namespace xadrez
             }
         }
 
+        //valida a posicao de origem da peca
         public void validarPosicaoDeOrigem(Posicao pos)
         {
             if (tab.peca(pos) == null)
@@ -206,6 +211,7 @@ namespace xadrez
             }
         }
 
+        //valida a posicao de destino da peca
         public void validarPosicaoDeDestino(Posicao origem, Posicao destino)
         {
             if (!tab.peca(origem).movimentoPossivel(destino))
@@ -214,6 +220,7 @@ namespace xadrez
             }
         }
 
+        //muda o jogador
         private void mudaJogador()
         {
             if (jogadorAtual == Cor.Branca)
@@ -226,6 +233,7 @@ namespace xadrez
             }
         }
 
+        //armazena as pecas capturadas
         public HashSet<Peca> pecasCapturadas(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
@@ -239,6 +247,7 @@ namespace xadrez
             return aux;
         }
 
+        //armazena as pecas em jogo
         public HashSet<Peca> pecasEmJogo(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
@@ -253,6 +262,7 @@ namespace xadrez
             return aux;
         }
 
+        //define a cor do aversario
         private Cor adversaria(Cor cor)
         {
             if (cor == Cor.Branca)
@@ -265,6 +275,7 @@ namespace xadrez
             }
         }
 
+        //encontra o rei de ambos os lados
         private Peca rei(Cor cor)
         {
             foreach (Peca x in pecasEmJogo(cor))
@@ -277,6 +288,7 @@ namespace xadrez
             return null;
         }
 
+        //verifica se o rei esta em xeque
         public bool estaEmXeque(Cor cor)
         {
             Peca R = rei(cor);
@@ -295,6 +307,7 @@ namespace xadrez
             return false;
         }
 
+        //verifica se aconteceu um xequemate
         public bool testeXequemate(Cor cor)
         {
             if (!estaEmXeque(cor))
@@ -326,12 +339,14 @@ namespace xadrez
             return true;
         }
 
+        //coloca as pecas no tabuleiro 
         public void colocarNovaPeca(char coluna, int linha, Peca peca)
         {
             tab.colocarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
             pecas.Add(peca);
         }
 
+        //as pecas
         private void colocarPecas()
         {
             colocarNovaPeca('a', 1, new Torre(tab, Cor.Branca));

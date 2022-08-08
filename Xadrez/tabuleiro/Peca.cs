@@ -15,6 +15,7 @@
             this.tab = tab;
         }   
 
+        //aumentar ou diminuir o movimento das pecas
         public void incrementarQteMovimentos()
         {
             qtdMovimentos++;
@@ -25,6 +26,7 @@
             qtdMovimentos--;
         }
 
+        //ver se existem movimentos possiveis para a peca
         public bool existeMovimentosPossiveis()
         {
             bool[,] mat = movimentosPossiveis();
@@ -41,11 +43,13 @@
             return false;
         }
 
+
         public bool movimentoPossivel(Posicao pos)
         {
             return movimentosPossiveis()[pos.linha, pos.coluna];
         }
 
+        //metodo abstract para definir nas classes das pecas especificas
         public abstract bool[,] movimentosPossiveis();
     
     }
